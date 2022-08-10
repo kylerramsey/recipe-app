@@ -3,6 +3,7 @@ import Veggie from "../components/Veggie";
 import { motion } from "framer-motion";
 
 import React from "react";
+import Gluten from "../components/Gluten";
 
 export default function Home() {
     return (
@@ -14,6 +15,7 @@ export default function Home() {
         >
             <Popular />
             <Veggie />
+            <Gluten />
         </motion.div>
     );
 }

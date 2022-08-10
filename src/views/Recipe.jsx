@@ -1,54 +1,81 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { DataContext } from "../contexts/DataProvider";
 
 export default function Recipe() {
+    const { addFavorite } = useContext(DataContext);
+    const [buttonText, setButtonText] = useState('Add to Favorites')
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        console.log(params.name)
+        addFavorite(params.name);
+        setButtonText('Favorite added!')
+    }
+
     const params = useParams();
     const [details, setDetails] = useState({});
-    const [activeTab, setActiveTab] = useState('instructions')
-
-    const fetchDetails = async () => {
-        const data = await fetch(
-            `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
-        );
-        const detailData = await data.json();
-        setDetails(detailData);
-    };
+    const [activeTab, setActiveTab] = useState("instructions");
 
     useEffect(() => {
+        const fetchDetails = async () => {
+            const data = await fetch(
+                `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+            );
+            const detailData = await data.json();
+            setDetails(detailData);
+        };
         fetchDetails(params.name);
     }, [params.name]);
 
-    return <DetailWrapper>
-        <div>
-            <h2>{details.title}</h2>
-            <img src={details.image} alt="" />
-        </div>
-        <Info>
-            <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab('ingredients')}>
-                Ingredients
-            </Button>
-            <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab('instructions')}>
-                Instructions
-            </Button>
-            {activeTab === 'instructions' && (
-                <div>
-                    <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
-                    <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
-                </div>
-            )}
+    return (
+        <DetailWrapper>
+            <div>
+                <h2>{details.title}</h2>
+                <img src={details.image} alt="" />
+            </div>
+            <Info>
+                <Button
+                    className={activeTab === "ingredients" ? "active" : ""}
+                    onClick={() => setActiveTab("ingredients")}
+                >
+                    Ingredients
+                </Button>
+                <Button
+                    className={activeTab === "instructions" ? "active" : ""}
+                    onClick={() => setActiveTab("instructions")}
+                >
+                    Instructions
+                </Button>
+                <Button id="favBut" onClick={handleSubmit}>
+                    {buttonText}
+                </Button>
+                {activeTab === "instructions" && (
+                    <div>
+                        <h3
+                            dangerouslySetInnerHTML={{
+                                __html: details.summary,
+                            }}
+                        ></h3>
+                        <h3
+                            dangerouslySetInnerHTML={{
+                                __html: details.instructions,
+                            }}
+                        ></h3>
+                    </div>
+                )}
 
-            {activeTab === 'ingredients' && (
-                <ul>
-                    {details.extendedIngredients.map((ingredient) => (
-                        <li key={ingredient.id}>{ingredient.original}</li>
-                    ))}
-                </ul>
-            )}
-            
-            
-        </Info>
-    </DetailWrapper>;
+                {activeTab === "ingredients" && (
+                    <ul>
+                        {details.extendedIngredients.map((ingredient) => (
+                            <li key={ingredient.id}>{ingredient.original}</li>
+                        ))}
+                    </ul>
+                )}
+            </Info>
+        </DetailWrapper>
+    );
 }
 
 const DetailWrapper = styled.div`

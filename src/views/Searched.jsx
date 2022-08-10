@@ -18,7 +18,8 @@ export default function Searched() {
         getSearched(params.search)
     }, [params.search])
 
-    return <Grid>
+    return (
+    <Grid>
         {searchedRecipes.map((item) => {
             return(
                 
@@ -31,7 +32,7 @@ export default function Searched() {
             )
         })}
     </Grid>
-}
+)}
 
 const Grid = styled.div`
     display: grid;

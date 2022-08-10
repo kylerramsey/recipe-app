@@ -20,7 +20,6 @@ export default function Search() {
                     value={input} 
                     placeholder='Search for any food here'
                     />
-                    
             </div>
         </FormStyle>
     );

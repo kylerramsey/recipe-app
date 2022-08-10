@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPizzaSlice, FaHamburger } from "react-icons/fa";
 import { GiNoodles, GiBowlOfRice } from "react-icons/gi";
+import { AiFillHeart } from 'react-icons/ai'
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
@@ -22,6 +23,10 @@ export default function Category() {
             <StyledLink to={'/Cuisine/Korean'}>
                 <GiBowlOfRice />
                 <h4>Korean</h4>
+            </StyledLink>
+            <StyledLink to={'/Favorites'}>
+                <AiFillHeart />
+                <h4>Favorites</h4>
             </StyledLink>
         </List>
     );
