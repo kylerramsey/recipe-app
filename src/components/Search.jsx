@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom'
 
 export default function Search() {
     const [input, setInput] = useState("");
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        navigate('/searched/' + input)
     }
 
     return (
@@ -24,7 +27,7 @@ export default function Search() {
 }
 
 const FormStyle = styled.form`
-    margin: 1rem 10rem;
+    margin: 1rem 20rem;
 
     div {
         position: relative;
