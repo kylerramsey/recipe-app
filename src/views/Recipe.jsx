@@ -16,7 +16,7 @@ export default function Recipe() {
     };
 
     useEffect(() => {
-        fetchDetails();
+        fetchDetails(params.name);
     }, [params.name]);
 
     return <DetailWrapper>

@@ -25,7 +25,7 @@ const Logo = styled(Link)`
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: 400;
-    font-family: 'Lobster Two', cursive;
+    font-family: 'Raleway', cursive;
 `
 
 const Nav = styled.div`

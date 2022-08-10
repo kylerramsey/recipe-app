@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import React from "react";
 
-export default function home() {
+export default function Home() {
     return (
         <motion.div
             animate={{ opacity: 1 }}
