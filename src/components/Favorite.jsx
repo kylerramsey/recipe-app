@@ -20,7 +20,7 @@ export default function Favorite(props) {
 
     return (
             <Card>
-                <Link to={"/recipe/" + props.favorite.id}>
+                <Link to={"/recipe/" + props.favorite.favId}>
                     <h4>{buildHeader()}</h4>
                     <img src={props.favorite.image}></img>
                 </Link>

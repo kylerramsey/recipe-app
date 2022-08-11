@@ -12,7 +12,7 @@ export default function Recipe() {
         event.preventDefault();
         console.log(details.image, details.title);
         console.log(details);
-        addFavorite(details.title, details.image);
+        addFavorite(details.title, details.image, params.name);
         setButtonText("Favorite added!");
     }
 
