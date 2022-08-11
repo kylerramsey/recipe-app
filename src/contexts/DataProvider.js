@@ -57,13 +57,14 @@ export const DataProvider = (props) => {
 
     }
 
-    const addFavorite = async(name) => {
+    const addFavorite = async(name, image) => {
         if (!user.loggedIn) {
             throw new Error("You can't add a Favorite if you're not logged in.")
         }
 
         const newFavorite = {
-            name: name
+            name: name,
+            image: image
         }
 
         const docRef = await addDoc(collection(db, "users", user.id, "favorites"), newFavorite)

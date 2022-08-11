@@ -14,7 +14,7 @@ export default function Login() {
                             Click below to sign in with Google
                             <br />
                             <span className="line">
-                            <button onClick={login} id="submit-btn" className="btn btn-info rounded-pill d-inline-flex mt-4 btn-lg" type="submit">Login</button>
+                            <button onClick={login} id="submit-btn" className="btn btn-dark rounded-pill d-inline-flex mt-4 btn-lg" type="submit">Login</button>
                             </span>
                         </p>
                     </section>

@@ -2,16 +2,18 @@ import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext } from "../contexts/DataProvider";
+import Similar from "../components/Similar";
 
 export default function Recipe() {
     const { addFavorite } = useContext(DataContext);
-    const [buttonText, setButtonText] = useState('Add to Favorites')
+    const [buttonText, setButtonText] = useState("Add to Favorites");
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(params.name)
-        addFavorite(params.name);
-        setButtonText('Favorite added!')
+        console.log(details.image, details.title);
+        console.log(details);
+        addFavorite(details.title, details.image);
+        setButtonText("Favorite added!");
     }
 
     const params = useParams();
@@ -30,51 +32,56 @@ export default function Recipe() {
     }, [params.name]);
 
     return (
-        <DetailWrapper>
-            <div>
-                <h2>{details.title}</h2>
-                <img src={details.image} alt="" />
-            </div>
-            <Info>
-                <Button
-                    className={activeTab === "ingredients" ? "active" : ""}
-                    onClick={() => setActiveTab("ingredients")}
-                >
-                    Ingredients
-                </Button>
-                <Button
-                    className={activeTab === "instructions" ? "active" : ""}
-                    onClick={() => setActiveTab("instructions")}
-                >
-                    Instructions
-                </Button>
-                <Button id="favBut" onClick={handleSubmit}>
-                    {buttonText}
-                </Button>
-                {activeTab === "instructions" && (
-                    <div>
-                        <h3
-                            dangerouslySetInnerHTML={{
-                                __html: details.summary,
-                            }}
-                        ></h3>
-                        <h3
-                            dangerouslySetInnerHTML={{
-                                __html: details.instructions,
-                            }}
-                        ></h3>
-                    </div>
-                )}
+        <>
+            <DetailWrapper>
+                <div>
+                    <h2>{details.title}</h2>
+                    <img src={details.image} alt="" />
+                </div>
+                <Info>
+                    <Button
+                        className={activeTab === "ingredients" ? "active" : ""}
+                        onClick={() => setActiveTab("ingredients")}
+                    >
+                        Ingredients
+                    </Button>
+                    <Button
+                        className={activeTab === "instructions" ? "active" : ""}
+                        onClick={() => setActiveTab("instructions")}
+                    >
+                        Instructions
+                    </Button>
+                    <Button id="favBut" onClick={handleSubmit}>
+                        {buttonText}
+                    </Button>
+                    {activeTab === "instructions" && (
+                        <div>
+                            <h3
+                                dangerouslySetInnerHTML={{
+                                    __html: details.summary,
+                                }}
+                            ></h3>
+                            <h3
+                                dangerouslySetInnerHTML={{
+                                    __html: details.instructions,
+                                }}
+                            ></h3>
+                        </div>
+                    )}
 
-                {activeTab === "ingredients" && (
-                    <ul>
-                        {details.extendedIngredients.map((ingredient) => (
-                            <li key={ingredient.id}>{ingredient.original}</li>
-                        ))}
-                    </ul>
-                )}
-            </Info>
-        </DetailWrapper>
+                    {activeTab === "ingredients" && (
+                        <ul>
+                            {details.extendedIngredients.map((ingredient) => (
+                                <li key={ingredient.id}>
+                                    {ingredient.original}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </Info>
+            </DetailWrapper>
+            <Similar />
+        </>
     );
 }
 

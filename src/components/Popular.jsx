@@ -7,10 +7,6 @@ import { Link } from 'react-router-dom'
 export default function Popular() {
     const [popular, setPopular] = useState([]);
 
-    // function reloadPage() {
-    //     getPopular()
-    // }
-
     useEffect(() => {
         getPopular();
     }, []);
@@ -64,14 +60,6 @@ export default function Popular() {
                         })}
                     </Splide>
                 </Wrapper>
-                {/* <button
-                    onClick={reloadPage}
-                    id="submit-btn"
-                    className="btn btn-light rounded-pill mb-3"
-                    type="submit"
-                >
-                    Reload
-                </button> */}
             </div>
         </>
     );
